@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
       duration: 0.2,
       scrollTrigger: {
         trigger: txtToAnimate,
-        markers: true
       }
     });
   });
