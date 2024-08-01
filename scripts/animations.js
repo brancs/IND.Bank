@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", (event) => {
   gsap.registerPlugin(ScrollTrigger);
-  const myText = new SplitType(".txt--animation", { types: 'words' });
+  splitTexts();
   const txtToAnimateList = gsap.utils.toArray(".txt--animation");
 
   txtToAnimateList.forEach(txtToAnimate => {
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
       delay: 0.1,
       duration: 0.2,
       scrollTrigger: {
-        trigger: txtToAnimate,
+        trigger: txtToAnimate
       }
     });
   });
@@ -26,4 +26,24 @@ document.addEventListener("DOMContentLoaded", (event) => {
   //     trigger: ".card--animation",
   //   }
   // });
+
+  const textsToShuffle = document.querySelectorAll(".text--shuffle");
+  textsToShuffle.forEach(text => {
+    if (!(text instanceof HTMLElement)) return;
+
+    const textToShuffle = baffle(text, {
+      characters: 'abcdefghijklmnopqrstuvwxyz',
+      speed: 75,
+    });
+
+    text.addEventListener("mouseenter", _.throttle(() => {
+      textToShuffle.start();
+      textToShuffle.reveal(1000, 500);
+    }, 1000, { 'trailing': false }))
+  });
 });
+
+function splitTexts() {
+  new SplitType(".txt--animation .title", { types: 'words' });
+  new SplitType(".txt--animation .subtitle", { types: 'words' });
+}
