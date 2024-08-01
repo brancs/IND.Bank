@@ -18,7 +18,7 @@
     </div>
   </nav>
   <header>
-    <div class="txt--animation">
+    <div class="header__txt--animation">
       <h1 class="title">We keep your money safe</h1>
       <p class="subtitle">As simple as it sounds</p>
     </div>
@@ -29,8 +29,19 @@
         <h2 class="title">Create your account now</h2>
         <p class="subtitle">Choose your card</p>
       </div>
-      <div class="card--animation">
-        <div class="card gradient-bg">
+      <div class="card__container card--animation">
+        <div class="card card--animation-left black">
+          <div class="card__header">
+            <div class="flag">Mastercard</div>
+          </div>
+          <div class="card__footer">
+            <div>
+              <span class="card__footer__label">Name</span>
+              <span class="card__footer__value text--shuffle">An Original Name</span>
+            </div>
+          </div>
+        </div>
+        <div class="card card--animation-right black">
           <div class="card__header">
             <div class="flag">Mastercard</div>
           </div>
@@ -42,7 +53,7 @@
           </div>
         </div>
       </div>
-      <button type="button">Lets go!</button>
+      <button type="button" class="primary text--shuffle">Lets go!</button>
     </section>
   </main>
   <footer>

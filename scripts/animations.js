@@ -1,7 +1,23 @@
 document.addEventListener("DOMContentLoaded", (event) => {
   gsap.registerPlugin(ScrollTrigger);
   splitTexts();
+  const txtHeaderToAnimateList = gsap.utils.toArray(".header__txt--animation");
   const txtToAnimateList = gsap.utils.toArray(".txt--animation");
+  const textsToShuffle = document.querySelectorAll(".text--shuffle");
+  const cardsToAnimate = document.querySelectorAll(".card");
+
+  txtHeaderToAnimateList.forEach(txtToAnimate => {
+    const txtToAnimateSelector = gsap.utils.selector(txtToAnimate);
+    gsap.to(txtToAnimateSelector(".word"), {
+      y: 0,
+      stagger: 0.15,
+      delay: 0.1,
+      duration: 0.2,
+      scrollTrigger: {
+        trigger: txtToAnimate,
+      }
+    });
+  });
 
   txtToAnimateList.forEach(txtToAnimate => {
     const txtToAnimateSelector = gsap.utils.selector(txtToAnimate);
@@ -11,23 +27,34 @@ document.addEventListener("DOMContentLoaded", (event) => {
       delay: 0.1,
       duration: 0.2,
       scrollTrigger: {
-        trigger: txtToAnimate
+        trigger: txtToAnimate,
+        toggleActions: "play reset none reset"
       }
     });
   });
 
-  // gsap.to((".card--animation .card"), {
-  //   y: 0,
-  //   scale: 1,
-  //   opacity: 1,
-  //   delay: 0.1,
-  //   duration: 0.1,
-  //   scrollTrigger: {
-  //     trigger: ".card--animation",
-  //   }
-  // });
+  gsap.to((".card--animation .card.card--animation-left"), {
+    opacity: 1,
+    rotate: -5,
+    delay: 0.1,
+    duration: 0.1,
+    scrollTrigger: {
+      trigger: ".card--animation",
+      markers: true
+    }
+  });
 
-  const textsToShuffle = document.querySelectorAll(".text--shuffle");
+  gsap.to((".card--animation .card.card--animation-right"), {
+    opacity: 1,
+    rotate: 5,
+    delay: 0.1,
+    duration: 0.1,
+    scrollTrigger: {
+      trigger: ".card--animation",
+      markers: true
+    }
+  });
+
   textsToShuffle.forEach(text => {
     if (!(text instanceof HTMLElement)) return;
 
@@ -46,4 +73,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
 function splitTexts() {
   new SplitType(".txt--animation .title", { types: 'words' });
   new SplitType(".txt--animation .subtitle", { types: 'words' });
+  new SplitType(".header__txt--animation .title", { types: 'words' });
+  new SplitType(".header__txt--animation .subtitle", { types: 'words' });
 }
