@@ -35,23 +35,33 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
   gsap.to((".card--animation .card.card--animation-left"), {
     opacity: 1,
-    rotate: -5,
-    delay: 0.1,
+    rotate: -20,
+    x: -50,
+    delay: 0.3,
     duration: 0.1,
     scrollTrigger: {
       trigger: ".card--animation",
-      markers: true
     }
   });
 
   gsap.to((".card--animation .card.card--animation-right"), {
     opacity: 1,
-    rotate: 5,
-    delay: 0.1,
+    rotate: 20,
+    x: 50,
+    delay: 0.3,
     duration: 0.1,
     scrollTrigger: {
       trigger: ".card--animation",
-      markers: true
+    }
+  });
+
+  gsap.to((".card--animation .card.card--animation-center"), {
+    opacity: 1,
+    y: -20,
+    delay: 0.3,
+    duration: 0.1,
+    scrollTrigger: {
+      trigger: ".card--animation",
     }
   });
 

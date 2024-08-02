@@ -87,7 +87,7 @@ main {
 
   section {
     display: flex;
-    gap: 2rem;
+    gap: 5rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -105,15 +105,15 @@ main {
 
 .card__container {
   flex: .5;
-  position: relative;
   width: 100%;
   min-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .card {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   width: var(--credit-card-width);
   aspect-ratio: 1 / 1.586;
   border-radius: calc((1 / 50) * var(--credit-card-width));
@@ -129,10 +129,24 @@ main {
     transform: rotate(45);
   }
 
-  &.black {
-    background: #000000;
-    background: -webkit-linear-gradient(to right, #434343, #000000);
-    background: linear-gradient(120deg, #434343, #000000);
+  &.card__primary {
+    background: #000000; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #434343, #000000); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(120deg, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #FFFFFF;
+  }
+
+  &.card__secondary {
+    background: #C04848; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #480048, #C04848); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #480048, #C04848); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #FFFFFF;
+  }
+
+  &.card__tertiary {
+    background: #FDC830; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #F37335, #FDC830); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     color: #FFFFFF;
   }
   
