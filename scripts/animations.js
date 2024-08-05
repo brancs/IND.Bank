@@ -1,6 +1,20 @@
 document.addEventListener("DOMContentLoaded", (event) => {
   gsap.registerPlugin(ScrollTrigger);
   splitTexts();
+  const sectionsToAnimate = gsap.utils.toArray(".section--animation");
+
+  sectionsToAnimate.forEach((section) => {
+    const textsHeaderToAnimate = gsap.utils.toArray(".header__txt--animation");
+    const textsToAnimate = gsap.utils.toArray(".txt--animation");
+    const cardsToAnimate = document.querySelectorAll("..card--animation");
+    gsap.timeline(section, {
+      scrollTrigger: {
+        trigger: txtToAnimate,
+        markers: true
+      }
+    });
+  });
+
   const txtHeaderToAnimateList = gsap.utils.toArray(".header__txt--animation");
   const txtToAnimateList = gsap.utils.toArray(".txt--animation");
   const textsToShuffle = document.querySelectorAll(".text--shuffle");
@@ -81,6 +95,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 });
 
 function splitTexts() {
+  //TODO simplificar isso aqui
   new SplitType(".txt--animation .title", { types: 'words' });
   new SplitType(".txt--animation .subtitle", { types: 'words' });
   new SplitType(".header__txt--animation .title", { types: 'words' });
