@@ -18,7 +18,7 @@
     </div>
   </nav>
   <header class="section--animation">
-    <div class="header__txt--animation">
+    <div class="txt--animation">
       <h1 class="title">We keep your money safe</h1>
       <p class="subtitle">As simple as it sounds</p>
     </div>
@@ -30,7 +30,7 @@
         <p class="subtitle">We fit your style</p>
       </div>
       <div class="card__container card--animation">
-        <div class="card card__primary card--animation-left">
+        <div class="card card__primary" data-animation-direction="left">
           <div class="card__header">
             <div class="flag">Mastercard</div>
           </div>
@@ -41,7 +41,7 @@
             </div>
           </div>
         </div>
-        <div class="card card__secondary card--animation-center">
+        <div class="card card__secondary" data-animation-direction="center">
           <div class="card__header">
             <div class="flag">Mastercard</div>
           </div>
@@ -52,7 +52,7 @@
             </div>
           </div>
         </div>
-        <div class="card card__tertiary card--animation-right">
+        <div class="card card__tertiary" data-animation-direction="right">
           <div class="card__header">
             <div class="flag">Mastercard</div>
           </div>
@@ -81,6 +81,6 @@
   <script src="https://unpkg.com/lenis@1.1.5/dist/lenis.min.js"></script>
   <script src="./scripts/lenis.js"></script>
   <script src="./scripts/main.js"></script>
-  <script src="./scripts/animations.js"></script>
+  <script src="./scripts/animations.js" defer></script>
 </body>
 </html>

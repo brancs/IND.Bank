@@ -1,83 +1,71 @@
+const cardAnimations = {
+  left: {
+    opacity: 1,
+    rotate: -20,
+    x: -50,
+    delay: 0,
+    duration: 0.1
+  },
+  right: {
+    opacity: 1,
+    rotate: 20,
+    x: 50,
+    delay: 0,
+    duration: 0.1,
+  },
+  center: {
+    opacity: 1,
+    y: -20,
+    delay: 0,
+    duration: 0.1,
+  }
+}
+
 document.addEventListener("DOMContentLoaded", (event) => {
   gsap.registerPlugin(ScrollTrigger);
   splitTexts();
   const sectionsToAnimate = gsap.utils.toArray(".section--animation");
 
   sectionsToAnimate.forEach((section) => {
-    const textsHeaderToAnimate = gsap.utils.toArray(".header__txt--animation");
-    const textsToAnimate = gsap.utils.toArray(".txt--animation");
-    const cardsToAnimate = document.querySelectorAll("..card--animation");
-    gsap.timeline(section, {
+    const sectionSelector = gsap.utils.selector(section);
+    const textsToAnimate = gsap.utils.toArray(sectionSelector(".txt--animation"));
+    const cardsToAnimate = gsap.utils.toArray(sectionSelector(".card--animation .card"));
+
+    //GSAP Timelines does not need a selector
+    const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: txtToAnimate,
+        trigger: section,
         markers: true
       }
     });
+
+    textsToAnimate.forEach((text) => {
+      const textSelector = gsap.utils.selector(text);
+      tl.to(textSelector(".word"), {
+        y: 0,
+        stagger: 0.15,
+        delay: 0.1,
+        duration: 0.2
+      });
+    });
+
+    cardsToAnimate.forEach((card) => {
+      const animationDirection = card.getAttribute("data-animation-direction");
+      tl.to(card, cardAnimations[animationDirection]);
+    });
   });
 
-  const txtHeaderToAnimateList = gsap.utils.toArray(".header__txt--animation");
-  const txtToAnimateList = gsap.utils.toArray(".txt--animation");
+  setTextsHoverEffect();
+});
+
+function splitTexts() {
+  //TODO simplificar isso aqui
+  new SplitType(".txt--animation .title", { types: 'words' });
+  new SplitType(".txt--animation .subtitle", { types: 'words' });
+}
+
+function setTextsHoverEffect() {
   const textsToShuffle = document.querySelectorAll(".text--shuffle");
-  const cardsToAnimate = document.querySelectorAll(".card");
-
-  txtHeaderToAnimateList.forEach(txtToAnimate => {
-    const txtToAnimateSelector = gsap.utils.selector(txtToAnimate);
-    gsap.to(txtToAnimateSelector(".word"), {
-      y: 0,
-      stagger: 0.15,
-      delay: 0.1,
-      duration: 0.2,
-      scrollTrigger: {
-        trigger: txtToAnimate,
-      }
-    });
-  });
-
-  txtToAnimateList.forEach(txtToAnimate => {
-    const txtToAnimateSelector = gsap.utils.selector(txtToAnimate);
-    gsap.to(txtToAnimateSelector(".word"), {
-      y: 0,
-      stagger: 0.15,
-      delay: 0.1,
-      duration: 0.2,
-      scrollTrigger: {
-        trigger: txtToAnimate,
-        toggleActions: "play reset none reset"
-      }
-    });
-  });
-
-  gsap.to((".card--animation .card.card--animation-left"), {
-    opacity: 1,
-    rotate: -20,
-    x: -50,
-    delay: 0.3,
-    duration: 0.1,
-    scrollTrigger: {
-      trigger: ".card--animation",
-    }
-  });
-
-  gsap.to((".card--animation .card.card--animation-right"), {
-    opacity: 1,
-    rotate: 20,
-    x: 50,
-    delay: 0.3,
-    duration: 0.1,
-    scrollTrigger: {
-      trigger: ".card--animation",
-    }
-  });
-
-  gsap.to((".card--animation .card.card--animation-center"), {
-    opacity: 1,
-    y: -20,
-    delay: 0.3,
-    duration: 0.1,
-    scrollTrigger: {
-      trigger: ".card--animation",
-    }
-  });
 
   textsToShuffle.forEach(text => {
     if (!(text instanceof HTMLElement)) return;
@@ -92,12 +80,4 @@ document.addEventListener("DOMContentLoaded", (event) => {
       textToShuffle.reveal(1000, 500);
     }, 1000, { 'trailing': false }))
   });
-});
-
-function splitTexts() {
-  //TODO simplificar isso aqui
-  new SplitType(".txt--animation .title", { types: 'words' });
-  new SplitType(".txt--animation .subtitle", { types: 'words' });
-  new SplitType(".header__txt--animation .title", { types: 'words' });
-  new SplitType(".header__txt--animation .subtitle", { types: 'words' });
 }
