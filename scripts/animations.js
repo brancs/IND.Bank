@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     cardsToAnimate.forEach((card) => {
       const animationDirection = card.getAttribute("data-animation-direction");
-      tl.to(card, cardAnimations[animationDirection]);
+      tl.to(card, cardAnimations[animationDirection], "75%");
     });
   });
 
@@ -59,7 +59,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
 });
 
 function splitTexts() {
-  //TODO simplificar isso aqui
   new SplitType(".txt--animation .title", { types: 'words' });
   new SplitType(".txt--animation .subtitle", { types: 'words' });
 }
